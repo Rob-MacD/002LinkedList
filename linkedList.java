@@ -80,7 +80,7 @@ public class LinkedList {
 
   public static Object getValue(LinkedList list, int index){
     Node<?> current = list.head;
-    for(int i = 0; i > index; i++) {
+    for(int i = 0; i < index; i++) {
       current = current.next;
     }
     return current.data;
