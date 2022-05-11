@@ -46,7 +46,7 @@ public class LinkedList {
   }
 
   public static LinkedList addAt(LinkedList list, int index, Object value) {
-    if (index == 0)
+    if (index <= 0)
       addHead(list, value);
     else if (index >= getCount())
       addTail(list, value);
@@ -67,17 +67,53 @@ public class LinkedList {
   }
 
   public static LinkedList removeHead(LinkedList list){
+    Node<?> current = list.head;
+    current = current.next;
+    current.prev = null;
+    list.head = current;
     return list;
   }
 
   public static LinkedList removeTail(LinkedList list){
+    Node<?> current = list.tail;
+    current = current.prev;
+    current.next = null;
+    list.tail = current;
     return list;
   }
 
-  public static LinkedList removeAt(LinkedList list){
+  public static LinkedList removeAt(LinkedList list, int index){
+    if (index <= 0)
+      removeHead(list);
+    else if (index >= getCount())
+      removeTail(list);
+    Node current = list.head;
+      for (int i = 0; i < index; i++){
+        current = current.next;
+    }
+    current.prev.next = current.next;
+    current.next.prev = current.prev;
+    current.next=null;
+    current.prev=null;
     return list;
   }
 
+  public static LinkedList clear(LinkedList list){
+    if (getCount() > 0){
+      Node current = list.tail;
+      for(int i = 0; i < getCount(); i++){
+        current.data = null;
+        current = current.prev;
+        current.next.prev = null;
+        current.next = null;
+      }
+      //once more for the head:
+      current.data = null;
+      current.next = null;
+    }
+    return list;
+  }
+  
   public static Object getValue(LinkedList list, int index){
     Node<?> current = list.head;
     for(int i = 0; i < index; i++) {
