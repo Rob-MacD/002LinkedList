@@ -5,14 +5,19 @@ public class Main {
     // list = LinkedList.addTail(list, "World!");
     // list = LinkedList.addHead(list, test);
     // list = LinkedList.addHead(list, 3);
-    list = LinkedList.addAt(list, 2, 0);
-    list = LinkedList.addAt(list, 0, 1);
-    list = LinkedList.addAt(list, 1, 2);
-    list = LinkedList.addAt(list, 1, 3);
-    list = LinkedList.addAt(list, 2, 4);
-    list = LinkedList.addAt(list, 0, 5);
-    list = LinkedList.addAt(list, 4, 6);
+    list = LinkedList.addHead(list, 0);
+    list = LinkedList.addHead(list, 1);
+    list = LinkedList.addHead(list, 2);
+    list = LinkedList.addHead(list, 3);
+    list = LinkedList.addHead(list, 4);
+    list = LinkedList.addHead(list, 5);
+    list = LinkedList.addHead(list, 6);
+    list = LinkedList.addHead(list, 7);
+    list = LinkedList.addHead(list, 8);
+    list = LinkedList.addHead(list, 9);
     System.out.println("Number of Nodes: " + LinkedList.getCount());
     System.out.println("Value of node 2: " + (int)LinkedList.getValue(list, 2));
+    LinkedList.printList(list);
+    list = LinkedList.clear(list);
   }
 }

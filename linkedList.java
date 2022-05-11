@@ -71,14 +71,18 @@ public class LinkedList {
     current = current.next;
     current.prev = null;
     list.head = current;
+    count--;
     return list;
   }
 
   public static LinkedList removeTail(LinkedList list){
     Node<?> current = list.tail;
     current = current.prev;
+    current.next.data = null;
+    current.next.prev = null;
     current.next = null;
     list.tail = current;
+    count--;
     return list;
   }
 
@@ -88,37 +92,33 @@ public class LinkedList {
     else if (index >= getCount())
       removeTail(list);
     Node current = list.head;
-      for (int i = 0; i < index; i++){
-        current = current.next;
-    }
+    for (int i = 0; i < index; i++)
+      current = current.next;
     current.prev.next = current.next;
     current.next.prev = current.prev;
     current.next=null;
     current.prev=null;
+    count--;
     return list;
   }
 
   public static LinkedList clear(LinkedList list){
-    if (getCount() > 0){
-      Node current = list.tail;
-      for(int i = 0; i < getCount(); i++){
-        current.data = null;
-        current = current.prev;
-        current.next.prev = null;
-        current.next = null;
-      }
-      //once more for the head:
-      current.data = null;
-      current.next = null;
+    if (getCount() > 0) {
+      do
+        removeTail(list);
+      while (count > 1);
     }
+    Node<?> current = list.tail;
+    current.data = null;
+    current.next = null;
+    current.prev = null;
     return list;
   }
-  
+
   public static Object getValue(LinkedList list, int index){
     Node<?> current = list.head;
-    for(int i = 0; i < index; i++) {
+    for(int i = 0; i < index; i++)
       current = current.next;
-    }
     return current.data;
   }
 
@@ -126,4 +126,12 @@ public class LinkedList {
     return count;
   }
 
+  public static void printList(LinkedList list){
+    Node current = list.head;
+    do{
+      System.out.print(current.data + " ");
+      current = current.next;
+    } while (current != null);
+    System.out.println("");
+  }
 }
